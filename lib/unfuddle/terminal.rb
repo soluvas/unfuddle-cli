@@ -30,7 +30,7 @@ module Unfuddle
     end
     
     # Show error message
-    def error(title, exception = null)
+    def error(title, exception = nil)
       STDERR.puts(title.red)
       raise exception if !exception.nil?
       exit(1)
