@@ -53,5 +53,23 @@ module Unfuddle
         "#{self.first_name} #{self.last_name}".strip
       end
     end
+    
+    class Component < Base
+      def self.site
+        Base.site + "/api/v1/projects/1"
+      end
+    end
+    
+    class Milestone < Base
+      def self.site
+        Base.site + "/api/v1/projects/1"
+      end
+    end
+
+    class Version < Base
+      def self.site
+        Base.site + "/api/v1/projects/1"
+      end
+    end
   end
 end

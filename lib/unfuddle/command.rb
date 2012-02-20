@@ -13,7 +13,10 @@ module Unfuddle
     'tickets'     => 'ticket:index',
     'ticket'      => 'ticket:create',
     'help'        => 'help:index',
-    'people'      => 'people:index'
+    'people'      => 'people:index',
+    'components'  => 'project:components',
+    'milestones'  => 'project:milestones',
+    'versions'    => 'project:versions'
   }
 
   class Command
@@ -31,10 +34,12 @@ module Unfuddle
     def self.run(command, args)
       begin
         run_internal(command, args.dup)
-      rescue InvalidCommand
-        error "Unknown command. Run 'unfuddle help' for usage information." ; exit
+      rescue InvalidCommand => ex
+        error "Unknown command '#{command}'. Run 'unfuddle help' for usage information."
+        exit(1)
       rescue Interrupt
-        error "\n[canceled]" ; exit
+        error "\n[canceled]"
+        exit(1)
       rescue Exception => ex
         error "Oooops... Error: #{ex.inspect}", ex
       end

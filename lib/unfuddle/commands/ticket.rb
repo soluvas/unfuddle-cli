@@ -23,6 +23,15 @@ class Unfuddle::Command::TicketCommand < Unfuddle::Command
     summary = ask('Summary', :required => true)
     description = ask('Description', :required => false)
     priority = ask('Priority (1=Lowest - 5=Highest)', :required => true)
+    components = Unfuddle::Resources::Component.all
+    components.each { |c| display "#{c.id.to_s.rjust(2)}: #{c.name}" }
+    component_id = ask('Component', :required => false)
+    versions = Unfuddle::Resources::Version.all
+    versions.each { |c| display "#{c.id.to_s.rjust(2)}: #{c.name}" }
+    version_id = ask('Version', :required => false)
+    milestones = Unfuddle::Resources::Milestone.all
+    milestones.each { |c| display "#{c.id.to_s.rjust(2)}: #{c.title}" }
+    milestone_id = ask('Milestone', :required => false)
     
     people = Unfuddle::Resources::Person.all
     display "People: " + people.map { |p| p.username }.sort.join(' ')
@@ -38,6 +47,9 @@ class Unfuddle::Command::TicketCommand < Unfuddle::Command
         :priority => priority,
         :reporter_id => reporter_id,
         :assignee_id => assignee_id,
+        :component_id => component_id,
+        :version_id => version_id,
+        :milestone_id => milestone_id
       }
     )
     display "Ticket created: ##{ticket.id} - #{ticket.summary}"
