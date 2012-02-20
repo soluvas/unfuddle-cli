@@ -12,7 +12,7 @@ class Unfuddle::Command::HelpCommand < Unfuddle::Command
       ['projects',        'Show list of all projects']
     ]
     
-    len = rows.first.map { |r| r.first.length }.sort.first
+    len = rows.first.map { |r| r.length }.sort.first
     max_len = 10 if len < 10
     
     rows.each do |r|
