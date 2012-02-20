@@ -19,11 +19,25 @@ class Unfuddle::Command::TicketCommand < Unfuddle::Command
   def create
     display 'Create a new ticket'
     display "Site: #{Unfuddle::Resources::Ticket.site}"
+    
+    summary = ask('Summary', :required => true)
+    description = ask('Description', :required => false)
+    priority = ask('Priority (1=Lowest - 5=Highest)', :required => true)
+    
+    people = Unfuddle::Resources::Person.all
+    display "People: " + people.map { |p| p.username }.sort.join(' ')
+    reporter_username = ask('Reported by', :required => true)
+    reporter_id = people.detect { |p| p.username == reporter_username }.id 
+    assignee_username = ask('Assigned to', :required => true)
+    assignee_id = people.detect { |p| p.username == assignee_username }.id
+      
     ticket = Unfuddle::Resources::Ticket.create(
       :ticket => {
-        :summary => ask('Summary', :required => true),
-        :description => ask('Description', :required => false),
-        :priority => ask('Priority (1-5)', :required => true)
+        :summary => summary,
+        :description => description,
+        :priority => priority,
+        :reporter_id => reporter_id,
+        :assignee_id => assignee_id,
       }
     )
     display "Ticket created: ##{ticket.id} - #{ticket.summary}"
