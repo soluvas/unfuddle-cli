@@ -2,9 +2,9 @@ h1. Unfuddle CLI
 
 h2. Requirements
 
-1. @unfuddle@ gem
-2. @rest-client@ gem
-3. @activeresource@ gem
+1. @rest-client@ gem
+2. @activeresource@ gem
+3. @log4r@ gem
 
 h2. Authenticate
 
@@ -29,3 +29,5 @@ checkout [repo]                # Clone existing repository
 init [repo]                    # Init git repo and connect it to Unfuddle
 drop [repo]                    # Delete existing repository
 projects                       # Show list of all projects
+tickets                        # Show list of all tickets in project 1
+ticket                         # Create a ticket in project 1

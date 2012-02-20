@@ -9,7 +9,9 @@ class Unfuddle::Command::HelpCommand < Unfuddle::Command
       ['checkout [repo]', 'Clone existing repository'],
       ['init [repo]',     'Init git repo and connect it to Unfuddle'],
       ['drop [repo]',     'Delete existing repository'],
-      ['projects',        'Show list of all projects']
+      ['projects',        'Show list of all projects'],
+      ['tickets',         'Show list of all tickets in project 1'],
+      ['ticket',          'Create a ticket in project 1']
     ]
     
     len = rows.first.map { |r| r.length }.sort.first

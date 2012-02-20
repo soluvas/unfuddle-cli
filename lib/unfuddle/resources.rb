@@ -1,7 +1,14 @@
+require 'log4r'
+include Log4r
+
 module Unfuddle
   module Resources
     class Base < ActiveResource::Base
       self.format = :json
+      
+      log = Logger.new 'unfuddle'
+      log.outputters = Outputter.stdout
+      self.logger = log
       
       def self.set_account(acc)
         self.site = acc.url + "/api/v1"
@@ -25,7 +32,14 @@ module Unfuddle
     
     class Changeset < Base ; end
     
-    class Project < Base ; end
+    class Project < Base
+    end
+
+    class Ticket < Base
+      def self.site
+        Base.site + "/api/v1/projects/1"
+      end
+    end
     
     class Account < Base
       # Get primary account

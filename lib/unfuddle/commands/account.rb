@@ -1,13 +1,16 @@
 class Unfuddle::Command::AccountCommand < Unfuddle::Command
   def auth
     if File.exists?(Unfuddle.credentials_file)
+      display "Credentials found at #{Unfuddle.credentials_file}"
       acc = Unfuddle::Account.load(Unfuddle.credentials_file)
       if acc.valid?
+        display "Valid account: #{acc.subdomain}"
         Unfuddle.account = acc
         Unfuddle::Resources::Base.set_account(acc)
         return true
       end
     end
+    display 'Credentials missing or invalid. Re-authenticating...'
     Unfuddle::Command.run('setup', {})
   end
   

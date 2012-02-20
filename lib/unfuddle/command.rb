@@ -10,6 +10,8 @@ module Unfuddle
     'init'        => 'repository:init',
     'log'         => 'repository:log',
     'projects'    => 'project:index',
+    'tickets'     => 'ticket:index',
+    'ticket'      => 'ticket:create',
     'help'        => 'help:index',
     'people'      => 'people:index'
   }
@@ -25,7 +27,7 @@ module Unfuddle
       @args = args
     end
     
-    # Execure command
+    # Execute command
     def self.run(command, args)
       begin
         run_internal(command, args.dup)
@@ -34,8 +36,7 @@ module Unfuddle
       rescue Interrupt
         error "\n[canceled]" ; exit
       rescue Exception => ex
-        error "Oooops... Error: #{ex.inspect}"
-        exit
+        error "Oooops... Error: #{ex.inspect}", ex
       end
     end
     

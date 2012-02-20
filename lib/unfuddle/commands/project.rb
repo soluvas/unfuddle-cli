@@ -4,7 +4,7 @@ class Unfuddle::Command::ProjectCommand < Unfuddle::Command
     projects = Unfuddle::Resources::Project.all
     unless projects.empty?
       display 'Projects:'
-      projects.each { |p| display "- #{p.title}" }
+      projects.each { |p| display "- #{p.id}: #{p.title}" }
     else
       display 'You dont have any projects yet'
     end
