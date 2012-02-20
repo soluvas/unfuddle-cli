@@ -3,7 +3,7 @@ class Unfuddle::Command::PeopleCommand < Unfuddle::Command
   def index
     display 'People:'
     Unfuddle::Resources::Person.all.each do |p|
-      display "- #{p.name.ljust(30)}#{p.email}"
+      display "#{p.id.to_s.rjust(2)} #{p.username.ljust(20)}#{p.name.ljust(30)}#{p.email}"
     end
   end
 end

@@ -3,6 +3,9 @@ class Unfuddle::Command::HelpCommand < Unfuddle::Command
     rows = [
       ['help',            'Show this help message'],
       ['setup',           'Configure your Unfuddle account'],
+      ['tickets',         'Show list of all tickets in project 1'],
+      ['ticket',          'Create a ticket in project 1'],
+      ['people',          'List all people'],
       ['list',            'Show list of all repositories'],
       ['log [repo]',      'Show commit log for the repository'],
       ['add [repo]',      'Create a new new repository'],
@@ -11,7 +14,6 @@ class Unfuddle::Command::HelpCommand < Unfuddle::Command
       ['drop [repo]',     'Delete existing repository'],
       ['projects',        'Show list of all projects'],
       ['tickets',         'Show list of all tickets in project 1'],
-      ['ticket',          'Create a ticket in project 1']
     ]
     
     len = rows.first.map { |r| r.length }.sort.first
